@@ -1,21 +1,13 @@
-class View {
-  //   constructor() {}
+export default class View {
+  constructor(root, handlers) {
+    this.root = root;
+    this.addNewItem = handlers.addNewItem;
+    this.updateCardText = handlers.updateCardText;
+    this.deleteItem = handlers.deleteItem;
+  }
 
-  _renderKanbanBoard(root, kanbanItems) {
-    const plannedItems = kanbanItems.filter(
-      (item) => item.category === 'planned'
-    );
-    const inProgressItems = kanbanItems.filter(
-      (item) => item.category === 'in-progress'
-    );
-    const pendingItems = kanbanItems.filter(
-      (item) => item.category === 'pending'
-    );
-    const stuckItems = kanbanItems.filter((item) => item.category === 'stuck');
-    const completedItems = kanbanItems.filter(
-      (item) => item.category === 'completed'
-    );
-
+  _renderKanbanBoard(kanbanItems) {
+    this.root.innerHTML = ``;
     const html = `
       <div class="board">
             <div class="planned group">
@@ -23,44 +15,43 @@ class View {
                     <h1 class="group-heading"> planned &nbsp;<i class="far fa-clipboard"></i></h1>
                 </div>
                 <div class="card-container">
-                ${plannedItems
-                  .map(
-                    (item) =>
-                      `<div class="card" draggable="true" data-id="${item.id}">
-                        <button class="btn--dlt">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <p class="card-item">${item.item_name}</p>
-                    </div>`
-                  )
-                  .join('')}
+                    ${kanbanItems
+                      .filter((item) => item.category === 'planned')
+                      .map(
+                        (item) =>
+                          `<div class="card" draggable="true" data-id="${item.id}">
+                            <button class="btn btn--dlt">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <p contenteditable class="card-text">${item.itemText}</p>
+                        </div>`
+                      )
+                      .join('')}
                 </div>
                 <div class="btn-container">
-                    <button class="btn">add item +</button>
+                    <button class="btn btn--add-item" data-category="planned">add item +</button>
                 </div>
             </div>
             <div class="in-progress group">
                 <div class="heading-container">
                     <h1 class="group-heading">in progress &nbsp;<i class="fas fa-hourglass-half"></i></h1>
                 </div>
-
-
                 <div class="card-container">
-
-                ${inProgressItems
-                  .map(
-                    (item) =>
-                      `<div class="card" draggable="true" data-id="${item.id}">
-                        <button class="btn--dlt">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <p class="card-item">${item.item_name}</p>
-                    </div>`
-                  )
-                  .join('')}
+                    ${kanbanItems
+                      .filter((item) => item.category === 'in-progress')
+                      .map(
+                        (item) =>
+                          `<div class="card" draggable="true" data-id="${item.id}">
+                            <button class="btn btn--dlt">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <p contenteditable class="card-text">${item.itemText}</p>
+                        </div>`
+                      )
+                      .join('')}
                 </div>
                 <div class="btn-container">
-                    <button class="btn">add item +</button>
+                    <button class="btn btn--add-item" data-category="in-progress">add item +</button>
                 </div>
             </div>
             <div class="stuck group">
@@ -69,21 +60,22 @@ class View {
                     <h1 class="group-heading">stuck &nbsp;<i class="fas fa-exclamation-triangle"></i></h1>
                 </div>
                 <div class="card-container">
-                 ${stuckItems
-                   .map(
-                     (item) =>
-                       `<div class="card" draggable="true" data-id="${item.id}">
-                        <button class="btn--dlt">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <p class="card-item">${item.item_name}</p>
-                    </div>`
-                   )
-                   .join('')}
+                    ${kanbanItems
+                      .filter((item) => item.category === 'stuck')
+                      .map(
+                        (item) =>
+                          `<div class="card" draggable="true" data-id="${item.id}">
+                           <button class="btn btn--dlt">
+                               <i class="fas fa-times"></i>
+                           </button>
+                           <p contenteditable class="card-text">${item.itemText}</p>
+                       </div>`
+                      )
+                      .join('')}
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn">add item +</button>
+                    <button class="btn btn--add-item" data-category="stuck">add item +</button>
                 </div>
 
             </div>
@@ -93,21 +85,22 @@ class View {
                 </div>
 
                 <div class="card-container">
-                 ${completedItems
-                   .map(
-                     (item) =>
-                       `<div class="card" draggable="true" data-id="${item.id}">
-                        <button class="btn--dlt">
-                            <i class="fas fa-times"></i>
-                        </button>
-                        <p class="card-item">${item.item_name}</p>
-                    </div>`
-                   )
-                   .join('')}
+                    ${kanbanItems
+                      .filter((item) => item.category === 'completed')
+                      .map(
+                        (item) =>
+                          `<div class="card" draggable="true" data-id="${item.id}">
+                           <button class="btn btn--dlt">
+                               <i class="fas fa-times"></i>
+                           </button>
+                           <p contenteditable class="card-text">${item.itemText}</p>
+                       </div>`
+                      )
+                      .join('')}
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn">add item +</button>
+                    <button class="btn btn--add-item" data-category="completed">add item +</button>
                 </div>
             </div>
             <div class="pending group">
@@ -116,27 +109,62 @@ class View {
                 </div>
 
                 <div class="card-container">
-                    ${pendingItems
+                    ${kanbanItems
+                      .filter((item) => item.category === 'pending')
                       .map(
                         (item) =>
                           `<div class="card" draggable="true" data-id="${item.id}">
-                        <button class="btn--dlt">
+                        <button class="btn btn--dlt">
                             <i class="fas fa-times"></i>
                         </button>
-                        <p class="card-item">${item.item_name}</p>
+                        <p contenteditable class="card-text">${item.itemText}</p>
                     </div>`
                       )
                       .join('')}
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn">add item +</button>
+                    <button class="btn btn--add-item" data-category="pending">add item +</button>
                 </div>
             </div>
         </div>
       `;
-    root.insertAdjacentHTML('afterbegin', html);
+    this.root.insertAdjacentHTML('afterbegin', html);
+
+    this._addItemHandler();
+    this._addTextHandler();
+    this._deleteItemHandler();
+  }
+
+  _addTextHandler() {
+    const cardText = this.root.querySelectorAll('.card-text');
+    cardText.forEach((text) =>
+      text.addEventListener('blur', (e) => {
+        this.updateCardText(
+          e.target.closest('.card').dataset.id,
+          text.textContent
+        );
+      })
+    );
+  }
+
+  _deleteItemHandler() {
+    const dltBtn = Array.from(this.root.querySelectorAll('.btn--dlt'));
+    dltBtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        this.deleteItem(e.target.closest('.card').dataset.id);
+      });
+    });
+  }
+
+  _addItemHandler() {
+    const addItemBtn = Array.from(this.root.querySelectorAll('.btn--add-item'));
+
+    addItemBtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const template = 'add work 🤖';
+        this.addNewItem(template, btn.dataset.category);
+      });
+    });
   }
 }
-
-export default new View();
