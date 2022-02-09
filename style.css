@@ -23,70 +23,12 @@ body {
   min-width: 1400px;
 }
 
-.board {
-  width: 95%;
-  height: 90vh;
+.heading-container {
   display: flex;
-  gap: 20px;
-  padding: 0 20px;
-}
-
-.group {
-  flex-basis: 20%;
-  display: grid;
-  grid-template-rows: 10% 80% 10%;
-  border-radius: 8px;
-  gap: 12px;
-}
-
-.card-container {
-  width: 100%;
-  display: flex;
-  gap: 20px;
-  flex-direction: column;
-  /* background-color: red; */
-  overflow-y: scroll;
-}
-
-.card-container::-webkit-scrollbar {
-  display: none;
-}
-
-.card {
-  flex-shrink: 0;
-  background-color: white;
-  padding: 24px;
-  border-radius: 8px;
-  position: relative;
-}
-
-.btn {
-  width: 100%;
-  border: 0;
-  outline: 0;
-  font-family: inherit;
-  font-size: inherit;
-  padding: 12px;
-  font-weight: inherit;
-  background-color: rgba(0, 0, 0, 0.8);
-  color: rgb(255, 255, 255);
-  border-radius: 8px;
-}
-
-.btn--dlt {
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  border: 0;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #29034d;
-  color: white;
-  cursor: pointer;
-  border-radius: 50%;
+  justify-content: center;
+  background-color: #ffffff;
+  border-radius: 12px;
 }
 
 .planned .group-heading {
@@ -113,16 +55,100 @@ body {
 .group-heading i {
   font-size: 24px;
 }
-.heading-container {
+
+.board {
+  width: 95%;
+  height: 90vh;
   display: flex;
-  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+}
+
+.group {
+  flex-basis: 20%;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  border-radius: 8px;
+  gap: 12px;
+}
+
+.card-container {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  /* background-color: red; */
+  overflow-y: scroll;
+  padding-top: 6px;
+}
+
+.card-container::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  flex-shrink: 0;
+  background-color: white;
+  padding: 24px;
+  border-radius: 8px;
+  position: relative;
+  transition: all 0.2s;
+  cursor: grab;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.completed .card:hover {
+  box-shadow: 0 6px #1487be;
+}
+.stuck .card:hover {
+  box-shadow: 0 6px #e0465e;
+}
+.in-progress .card:hover {
+  box-shadow: 0 6px #1fc778;
+}
+.planned .card:hover {
+  box-shadow: 0 6px #ff6d18;
+}
+.pending .card:hover {
+  box-shadow: 0 6px #a162d9;
+}
+
+.btn {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn--dlt {
+  font-size: 12px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  display: flex;
   justify-content: center;
-  background-color: #ffffff;
-  border-radius: 12px;
+  align-items: center;
+  background-color: #29034d;
+  border-radius: 50%;
 }
 
 .btn-container {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn-container .btn {
+  padding: 12px;
 }
