@@ -4,11 +4,11 @@ class Storage {
 
   _getKanbanItems() {
     const kanbanItems = localStorage.getItem('kanban-items');
-    return JSON.parse(kanbanItems);
+    return JSON.parse(kanbanItems) || [];
   }
 
   _saveKanbanItem(itemText, category) {
-    const kanbanItems = this._getKanbanItems() || [];
+    const kanbanItems = this._getKanbanItems();
 
     const id = Math.floor(Math.random() * 10000000000);
 
@@ -22,7 +22,7 @@ class Storage {
   }
 
   _updateKanbanItem(id, itemText) {
-    const kanbanItems = this._getKanbanItems() || [];
+    const kanbanItems = this._getKanbanItems();
     const kanbanItem = kanbanItems.find((item) => item.id === +id);
 
     if (kanbanItem) {
@@ -32,10 +32,10 @@ class Storage {
   }
 
   _removeKanbanItem(id) {
-    const kanbanItems = this._getKanbanItems() || [];
+    const kanbanItems = this._getKanbanItems();
     const itemIndex = kanbanItems.findIndex((item) => item.id === +id);
 
-    if (!itemIndex > -1) {
+    if (!(itemIndex > -1)) {
       return;
     }
 

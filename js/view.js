@@ -16,7 +16,7 @@ export default class View {
                 </div>
                 <div class="card-container">
                     ${kanbanItems
-                      .filter((item) => item.category === 'planned')
+                      ?.filter((item) => item.category === 'planned')
                       .map(
                         (item) =>
                           `<div class="card" draggable="true" data-id="${item.id}">
@@ -38,7 +38,7 @@ export default class View {
                 </div>
                 <div class="card-container">
                     ${kanbanItems
-                      .filter((item) => item.category === 'in-progress')
+                      ?.filter((item) => item.category === 'in-progress')
                       .map(
                         (item) =>
                           `<div class="card" draggable="true" data-id="${item.id}">
@@ -61,7 +61,7 @@ export default class View {
                 </div>
                 <div class="card-container">
                     ${kanbanItems
-                      .filter((item) => item.category === 'stuck')
+                      ?.filter((item) => item.category === 'stuck')
                       .map(
                         (item) =>
                           `<div class="card" draggable="true" data-id="${item.id}">
@@ -86,7 +86,7 @@ export default class View {
 
                 <div class="card-container">
                     ${kanbanItems
-                      .filter((item) => item.category === 'completed')
+                      ?.filter((item) => item.category === 'completed')
                       .map(
                         (item) =>
                           `<div class="card" draggable="true" data-id="${item.id}">
@@ -110,7 +110,7 @@ export default class View {
 
                 <div class="card-container">
                     ${kanbanItems
-                      .filter((item) => item.category === 'pending')
+                      ?.filter((item) => item.category === 'pending')
                       .map(
                         (item) =>
                           `<div class="card" draggable="true" data-id="${item.id}">
