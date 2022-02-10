@@ -32,7 +32,7 @@ body {
 }
 
 .planned .group-heading {
-  color: #ff6d18;
+  color: #ffa318;
 }
 .in-progress .group-heading {
   color: #1fc778;
@@ -77,9 +77,12 @@ body {
   display: flex;
   gap: 20px;
   flex-direction: column;
-  /* background-color: red; */
   overflow-y: scroll;
   padding-top: 6px;
+}
+
+.card-container.dragover {
+  background-color: #380666;
 }
 
 .card-container::-webkit-scrollbar {
@@ -105,17 +108,17 @@ body {
   cursor: text;
 }
 
-.completed .card:hover {
-  box-shadow: 0 6px #1487be;
-}
-.stuck .card:hover {
-  box-shadow: 0 6px #e0465e;
+.planned .card:hover {
+  box-shadow: 0 6px #ffa318;
 }
 .in-progress .card:hover {
   box-shadow: 0 6px #1fc778;
 }
-.planned .card:hover {
-  box-shadow: 0 6px #ff6d18;
+.stuck .card:hover {
+  box-shadow: 0 6px #e0465e;
+}
+.completed .card:hover {
+  box-shadow: 0 6px #1487be;
 }
 .pending .card:hover {
   box-shadow: 0 6px #a162d9;
