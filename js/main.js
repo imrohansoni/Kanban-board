@@ -1,5 +1,6 @@
 import storage from './storage.js';
 import View from './view.js';
+import DragDropAPI from './dragDropAPI.js';
 const main = document.querySelector('.main');
 
 // GETTING ALL ITEM FROM THE LOCAL STORAGE
@@ -11,9 +12,7 @@ const handlers = {
     refresh();
   },
   updateCardText: (id, text) => {
-    console.log(id, text);
     storage._updateKanbanItem(id, text);
-    refresh();
   },
   deleteItem: (id) => {
     storage._removeKanbanItem(id);
@@ -22,8 +21,17 @@ const handlers = {
 };
 
 const view = new View(main, handlers);
+
 view._renderKanbanBoard(kanbanItems);
+
+const dragDropAPI = new DragDropAPI(main, (id, category) => {
+  storage._updateKanbanItem(id, undefined, category);
+});
 
 const refresh = () => {
   view._renderKanbanBoard(storage._getKanbanItems());
+  dragDropAPI._addDragHandler();
+  dragDropAPI._addContainerHandler();
 };
+
+refresh();

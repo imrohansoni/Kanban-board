@@ -14,7 +14,7 @@ export default class View {
                 <div class="heading-container">
                     <h1 class="group-heading"> planned &nbsp;<i class="far fa-clipboard"></i></h1>
                 </div>
-                <div class="card-container">
+                <div class="card-container" data-category="planned">
                     ${kanbanItems
                       ?.filter((item) => item.category === 'planned')
                       .map(
@@ -29,14 +29,14 @@ export default class View {
                       .join('')}
                 </div>
                 <div class="btn-container">
-                    <button class="btn btn--add-item" data-category="planned">add item +</button>
+                    <button class="btn btn--add-item" data-category="planned">add +</button>
                 </div>
             </div>
             <div class="in-progress group">
                 <div class="heading-container">
                     <h1 class="group-heading">in progress &nbsp;<i class="fas fa-hourglass-half"></i></h1>
                 </div>
-                <div class="card-container">
+                <div class="card-container" data-category="in-progress">
                     ${kanbanItems
                       ?.filter((item) => item.category === 'in-progress')
                       .map(
@@ -51,7 +51,7 @@ export default class View {
                       .join('')}
                 </div>
                 <div class="btn-container">
-                    <button class="btn btn--add-item" data-category="in-progress">add item +</button>
+                    <button class="btn btn--add-item" data-category="in-progress">add +</button>
                 </div>
             </div>
             <div class="stuck group">
@@ -59,7 +59,7 @@ export default class View {
                 <div class="heading-container">
                     <h1 class="group-heading">stuck &nbsp;<i class="fas fa-exclamation-triangle"></i></h1>
                 </div>
-                <div class="card-container">
+                <div class="card-container" data-category="stuck">
                     ${kanbanItems
                       ?.filter((item) => item.category === 'stuck')
                       .map(
@@ -75,7 +75,7 @@ export default class View {
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn btn--add-item" data-category="stuck">add item +</button>
+                    <button class="btn btn--add-item" data-category="stuck">add +</button>
                 </div>
 
             </div>
@@ -84,7 +84,7 @@ export default class View {
                     <h1 class="group-heading">completed&nbsp;&nbsp;<i class="fas fa-flag"></i></h1>
                 </div>
 
-                <div class="card-container">
+                <div class="card-container" data-category="completed">
                     ${kanbanItems
                       ?.filter((item) => item.category === 'completed')
                       .map(
@@ -100,7 +100,7 @@ export default class View {
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn btn--add-item" data-category="completed">add item +</button>
+                    <button class="btn btn--add-item" data-category="completed">add +</button>
                 </div>
             </div>
             <div class="pending group">
@@ -108,7 +108,7 @@ export default class View {
                     <h1 class="group-heading">pendings&nbsp;&nbsp;<i class="fas fa-calendar-day"></i></h1>
                 </div>
 
-                <div class="card-container">
+                <div class="card-container" data-category="pending">
                     ${kanbanItems
                       ?.filter((item) => item.category === 'pending')
                       .map(
@@ -124,7 +124,7 @@ export default class View {
                 </div>
 
                 <div class="btn-container">
-                    <button class="btn btn--add-item" data-category="pending">add item +</button>
+                    <button class="btn btn--add-item" data-category="pending">add +</button>
                 </div>
             </div>
         </div>

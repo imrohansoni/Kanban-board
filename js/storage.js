@@ -21,12 +21,13 @@ class Storage {
     this._updateLocalStorage(kanbanItems);
   }
 
-  _updateKanbanItem(id, itemText) {
+  _updateKanbanItem(id, itemText = undefined, category = undefined) {
     const kanbanItems = this._getKanbanItems();
     const kanbanItem = kanbanItems.find((item) => item.id === +id);
 
     if (kanbanItem) {
-      kanbanItem.itemText = itemText;
+      kanbanItem.itemText = itemText || kanbanItem.itemText;
+      kanbanItem.category = category || kanbanItem.category;
     }
     this._updateLocalStorage(kanbanItems);
   }
